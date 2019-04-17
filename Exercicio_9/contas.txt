@@ -1,0 +1,8 @@
+Conta Corrente,0,1225,antonio,6799.9
+Conta Corrente,1,6852,breno,6500.0
+Conta Poupança,2,1848,andre,1200.0
+Conta Corrente,3,2965,bruna,0.0
+Conta Poupança,4,595,diego,8500.0
+Conta Corrente,5,184,zilda,5000000.0
+Conta Corrente,6,155,manoel,100000.0
+Conta Corrente,7,6595,adeilson,18499.9
