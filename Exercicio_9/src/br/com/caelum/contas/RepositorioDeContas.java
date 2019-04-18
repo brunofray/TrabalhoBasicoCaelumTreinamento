@@ -14,20 +14,21 @@ import br.com.caelum.contas.modelo.ContaPoupanca;
 public class RepositorioDeContas {
 	public void salva(List<Conta> contas) {
 		// Utilize o devido	try	/ catch	e relance a	exceção	como RuntimeException
-		// nao consegui deixar so ela
 		PrintStream stream = null;
 		try {
 			stream = new PrintStream("contas.txt");
-		} catch ( FileNotFoundException e) {
+		}catch ( FileNotFoundException e) {
 			System.out.println("Nao foi possivel abrir o arquivo para leitura");
 			throw new RuntimeException(e);
-		}
+		}finally {
 		for (Conta conta : contas) {
 			stream.println(conta.getTipo() + "," + conta.getNumero() + ","
 				+ conta.getAgencia() + "," + conta.getTitular() + "," 
 				+ conta.getSaldo());
-		}
+		} 
 		stream.close();
+		}
+		
 	}
 	
 	public List<Conta> carrega(){

@@ -6,3 +6,4 @@ Conta Poupança,4,595,diego,8500.0
 Conta Corrente,5,184,zilda,5000000.0
 Conta Corrente,6,155,manoel,100000.0
 Conta Corrente,7,6595,adeilson,18499.9
+Conta Corrente,8,11247,Livia,0.0

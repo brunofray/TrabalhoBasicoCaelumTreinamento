@@ -18,7 +18,7 @@ public class Main {
 		t2.start();
 		
 		
-		// CLASSE ANONIMA
+		// CLASSE ANONIMA - PERMITE DAR NEW NUMA INTERFACE CONTANTO QUE IMPLEMENTE O MÉTODO.
 		
 //		Runnable r = new Runnable() {
 //			public void run() {
