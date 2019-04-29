@@ -414,7 +414,7 @@ public class Ensinamentos {
 			          				"É o cliente propriamente dito.\r\n" + 
 			          				"Método getInputStream(): Através deste, o servidor consegue capturar o que o cliente está enviando.\r\n" + 
 			          				"Método getOutputStream(): Envia dados para o outro lado da comunicação, neste caso o ServerSocket.");
-			          		voltarCls(sc);;
+			          		voltarCls(sc);
 			          		break;
 
 			          	default:
