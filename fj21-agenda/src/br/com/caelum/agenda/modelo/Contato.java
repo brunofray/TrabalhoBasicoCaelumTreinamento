@@ -7,6 +7,7 @@ public class Contato {
 	private String nome;
 	private String email;
 	private String endereco;
+	private String rg;
 	private Calendar dataNascimento;
 
 	public Long getId() {
@@ -48,5 +49,15 @@ public class Contato {
 	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+	
+	
 
 }

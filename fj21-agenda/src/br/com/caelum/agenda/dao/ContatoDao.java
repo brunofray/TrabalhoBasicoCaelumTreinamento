@@ -30,8 +30,8 @@ public class ContatoDao {
 
 	public void adiciona(Contato contato) {
 		String sql = "insert into contatos " + 
-				"(nome,email,endereco,dataNascimento)" + 
-				" values (?,?,?,?)";
+				"(nome,email,endereco,dataNascimento,rg)" + 
+				" values (?,?,?,?,?)";
 		
 		try {
 			// Utilização do prepared Statement para inserção
@@ -42,6 +42,7 @@ public class ContatoDao {
 			stmt.setString(2, contato.getEmail());
 			stmt.setString(3, contato.getEndereco());
 			stmt.setDate(4, new Date(contato.getDataNascimento().getTimeInMillis()));
+			stmt.setString(5, contato.getRg());
 			
 			// Execução
 			stmt.execute();
@@ -73,6 +74,8 @@ public class ContatoDao {
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("dataNascimento"));
 				contato.setDataNascimento(data);
+
+				contato.setRg(rs.getString("rg"));
 				
 				// Adição do objeto a lista
 				contatos.add(contato);	
@@ -98,6 +101,7 @@ public class ContatoDao {
 			contato.setNome(rs.getString("nome"));
 			contato.setEndereco(rs.getString("endereco"));
 			contato.setEmail(rs.getString("email"));
+			contato.setRg(rs.getString("rg"));
 			
 			stmt.execute();
 			rs.close();
@@ -110,7 +114,7 @@ public class ContatoDao {
 	
 	public void altera(Contato contato) {
 		String sql = "update contatos set nome=?, email=?," +
-				"endereco=?, dataNascimento=? where id=?";
+				"endereco=?, dataNascimento=?, rg=?, where id=?";
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -118,7 +122,8 @@ public class ContatoDao {
 			stmt.setString(2, contato.getEmail());
 			stmt.setString(3, contato.getEndereco());
 			stmt.setDate(4, new Date(contato.getDataNascimento().getTimeInMillis()));
-			stmt.setLong(5, contato.getId());
+			stmt.setString(5, contato.getRg());
+			stmt.setLong(6, contato.getId());
 			
 			stmt.execute();
 			stmt.close();

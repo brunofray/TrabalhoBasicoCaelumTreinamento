@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,24 +57,30 @@ public class AdicionaContatoServlet extends HttpServlet{
 			out.println("Erro de conversão da data");
 			return; // Finaliza execução do método
 		}
+
+		String rg = request.getParameter("rg");
 		// Monta o objeto contato
 		Contato contato = new Contato();
 		contato.setNome(nome);
 		contato.setEndereco(endereco);
 		contato.setEmail(email);
 		contato.setDataNascimento(dataNascimento);
+		contato.setRg(rg);
 		
 		// Salvamento do contato
 		ContatoDao dao = new ContatoDao();
 		dao.adiciona(contato);
 		
-		// Impressão do nome do contato que foi adicionado
-		out.println("<html>");
-		out.println("<body>");
-		out.println("Contato " + contato.getNome() + " adicionado com sucesso!");
-		out.println("</body>");
-		out.println("</html>");
+//		// Impressão do nome do contato que foi adicionado
+//		out.println("<html>");
+//		out.println("<body>");
+//		out.println("Contato " + contato.getNome() + " adicionado com sucesso!");
+//		out.println("</body>");
+//		out.println("</html>");
 		
+		RequestDispatcher rd = request.getRequestDispatcher("/contato-adicionado.jsp");
+		rd.forward(request, response);
+
 	}
 	
 }
