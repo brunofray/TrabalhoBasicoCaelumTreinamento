@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="caelum" %>
 
 <html>
@@ -9,14 +10,19 @@
 		</head>
 	<body>
 	<c:import url="cabecalho.jsp" />
-		<h1>Adiciona Contatos</h1>
+		<h1>Atualização de Contatos</h1>
 		<hr />
-		<form action="adicionaContato">
-			Nome: <input type="text" name="nome" /><br />
-			E-mail: <input type="text" name="email" /><br />
-			Endereço: <input type="text" name="endereco" /><br />
-			Data Nascimento: <caelum:campoData id="dataNascimento" /><br />
-			RG: <input type="text" name="rg" /><br/>
+		<form action="mvc?logica=SalvaContatoLogic" method="POST">
+			<c:if test="${not empty contato.id}">
+				<input type="hidden" name="id" value="${contato.id}" />
+			</c:if>
+			
+			Nome: <input type="text" name="nome" value="${contato.nome}" /><br/>
+			E-mail: <input type="text" name="email" value="${contato.email}"/><br />
+			Endereço: <input type="text" name="endereco" value="${contato.endereco}" /><br />
+			<fmt:formatDate value="${contato.dataNascimento.time}" pattern="dd/MM/yyyy" var="data" />
+			Data Nascimento: <caelum:campoData id="dataNascimento" data="${data}" /><br />
+			RG: <input type="text" name="rg" value="${contato.rg}" /><br />
 					
 			<input type="submit" value="Gravar" />
 		</form>

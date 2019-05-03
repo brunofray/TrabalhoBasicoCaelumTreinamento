@@ -35,8 +35,7 @@ public class ContatoDao {
 		
 		try {
 			// Utilização do prepared Statement para inserção
-			PreparedStatement stmt = connection.prepareStatement(sql);
-			
+			PreparedStatement stmt = connection.prepareStatement(sql);	
 			// Setando os valores
 			stmt.setString(1, contato.getNome());
 			stmt.setString(2, contato.getEmail());
@@ -66,6 +65,7 @@ public class ContatoDao {
 			while(rs.next()) {
 				// Criação do objeto contato
 				Contato contato = new Contato();
+				contato.setId(rs.getLong("id"));
 				contato.setNome(rs.getString("nome"));
 				contato.setEmail(rs.getString("email"));
 				contato.setEndereco(rs.getString("endereco"));
@@ -88,33 +88,35 @@ public class ContatoDao {
 		}
 	}
 	
-	public Contato pesquisar(int id) {
-		Contato contato = new Contato();
+	public Contato pesquisar(Long id) {
+		String sql = "select * from contatos where id=?";
 		try {
-			PreparedStatement stmt = connection.prepareStatement("select * from contatos where id=?");
+			PreparedStatement stmt = this.connection.prepareStatement(sql);
 			stmt.setLong(1, id);
 			ResultSet rs = stmt.executeQuery();
 			
-			
+			Contato contato = new Contato();
 			rs.next();
 			contato.setId(rs.getLong("id"));
 			contato.setNome(rs.getString("nome"));
 			contato.setEndereco(rs.getString("endereco"));
 			contato.setEmail(rs.getString("email"));
+
+			Calendar data = Calendar.getInstance();
+			data.setTime(rs.getDate("dataNascimento"));
+			contato.setDataNascimento(data);
+			
 			contato.setRg(rs.getString("rg"));
 			
-			stmt.execute();
-			rs.close();
-			stmt.close();
+			return contato;
 		} catch (SQLException e) {
 			throw new DaoException(e, id);
 		}
-		return contato;	
 	}
 	
 	public void altera(Contato contato) {
 		String sql = "update contatos set nome=?, email=?," +
-				"endereco=?, dataNascimento=?, rg=?, where id=?";
+				"endereco=?, dataNascimento=?, rg=? where id=?";
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -126,7 +128,6 @@ public class ContatoDao {
 			stmt.setLong(6, contato.getId());
 			
 			stmt.execute();
-			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

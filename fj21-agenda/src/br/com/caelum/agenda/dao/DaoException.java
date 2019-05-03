@@ -8,7 +8,7 @@ public class DaoException extends RuntimeException{
 	}
 	
 	// Excessão de pesquisa
-	public DaoException(SQLException e, int id) {
+	public DaoException(SQLException e, Long id) {
 		super("Aconteceu um erro! O id " + id + " não existe no banco de dados!");
 	}
 
